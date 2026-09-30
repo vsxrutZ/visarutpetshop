@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EVO Exotic Pets — ร้านสัตว์เลี้ยงพิเศษ ขอนแก่น</title>
+<meta name="description" content="EVO Exotic Pets ร้านสัตว์เลี้ยงพิเศษ ขอนแก่น สั่งสัตว์เลี้ยง อาหาร และอุปกรณ์ออนไลน์ สะสมแต้มทุกออเดอร์">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F7F7F9; --surface:#FFFFFF; --ink:#23222B; --ink-2:#605E6E; --line:#E4E3EA;
+  --brand:#5B5799; --brand-strong:#4A4682; --on-brand:#FFFFFF; --brand-soft:#EEEDF6; --tint:#F0EFF6;
+  --ok:#3F7D5C; --ok-soft:#E6F1EB; --danger:#B3384E;
+  --font:'IBM Plex Sans Thai','Noto Sans Thai',system-ui,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.7;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{margin:0;font-weight:600;line-height:1.35}
+p{margin:0}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:6px}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+section{padding:72px 0}
+.muted{color:var(--ink-2)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;border-radius:10px;font-weight:500;text-decoration:none;cursor:pointer;background:var(--brand);color:var(--on-brand);border:1px solid var(--brand);transition:background .15s}
+.btn:hover{background:var(--brand-strong);border-color:var(--brand-strong)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--brand);background:var(--brand-soft)}
+.btn.sm{padding:7px 14px;font-size:14px}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;padding:10px 0}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.logo .faces{display:flex}
+.logo .faces svg{width:22px;height:22px;margin-right:-4px}
+.logo b{display:block;font-size:20px;line-height:1;color:var(--brand-strong);margin-left:6px}
+.logo small{display:block;font-size:11px;line-height:1.2;color:var(--ink-2);margin-left:6px}
+nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-left:8px;flex:1}
+nav::-webkit-scrollbar{display:none}
+nav a{padding:8px 12px;border-radius:8px;text-decoration:none;font-size:15px;white-space:nowrap;color:var(--ink-2)}
+nav a:hover{background:var(--tint);color:var(--ink)}
+.actions{display:flex;gap:8px;flex:none}
+.cartbtn{position:relative}
+.badge{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--on-brand);color:var(--brand);font-size:12px;font-weight:600;display:inline-grid;place-items:center;line-height:1}
+.btn.ghost .badge{background:var(--brand);color:var(--on-brand)}
+
+/* hero */
+.hero{padding:56px 0 64px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(30px,4.4vw,48px);letter-spacing:-.01em}
+.hero .lead{margin-top:16px;max-width:32em;color:var(--ink-2);font-size:18px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.points{display:flex;flex-wrap:wrap;gap:10px 28px;margin:32px 0 0;padding:0;list-style:none;color:var(--ink-2);font-size:15px}
+.points li{display:flex;gap:8px;align-items:center}
+.points li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brand);opacity:.6}
+.feature{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px}
+.feature .top-row{display:flex;gap:16px;align-items:center}
+.feature .thumb{width:84px;height:84px;font-size:44px}
+.feature small{color:var(--brand);font-weight:500;font-size:13px}
+.feature h3{font-size:20px}
+.incl{margin:16px 0;padding:14px 0;border-block:1px solid var(--line);color:var(--ink-2);font-size:14px;display:flex;flex-wrap:wrap;gap:6px}
+.incl span{background:var(--tint);border-radius:999px;padding:2px 12px}
+.price-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.price{font-size:22px;font-weight:600}
+.was{font-size:14px;color:var(--ink-2);text-decoration:line-through;margin-left:6px;font-weight:400}
+.save{font-size:13px;color:var(--ok);font-weight:500;display:block}
+
+/* headings */
+.head{max-width:40em;margin-bottom:28px}
+.head h2{font-size:clamp(24px,3vw,32px)}
+.head p{margin-top:8px;color:var(--ink-2)}
+.alt{background:var(--surface);border-block:1px solid var(--line)}
+
+/* toolbar */
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:22px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tab{padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:15px}
+.tab:hover{border-color:var(--brand)}
+.tab[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+.tools{display:flex;gap:10px;margin-left:auto;flex-wrap:wrap}
+.field{padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);min-width:0}
+.field:focus{border-color:var(--brand);outline:none;box-shadow:0 0 0 3px var(--brand-soft)}
+
+/* products */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.p{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.thumb{background:var(--tint);border-radius:12px;display:grid;place-items:center;font-size:48px;aspect-ratio:4/3;line-height:1}
+.p h3{font-size:17px}
+.p p{font-size:14px;color:var(--ink-2);line-height:1.6;margin-top:2px}
+.tag{display:inline-block;font-size:12px;padding:1px 10px;border-radius:999px;background:var(--brand-soft);color:var(--brand-strong);margin-bottom:6px}
+.pf{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pf strong{font-size:18px}
+.empty{padding:40px;text-align:center;color:var(--ink-2);border:1px dashed var(--line);border-radius:16px;background:var(--surface)}
+.note{font-size:13px;color:var(--ink-2);margin-top:16px}
+
+/* kits */
+.kits{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.kit{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.kit .thumb{aspect-ratio:auto;height:72px;width:72px;font-size:38px}
+.kit h3{font-size:19px}
+.kit ul{margin:0;padding:0 0 0 18px;color:var(--ink-2);font-size:14px}
+.kit .price-row{margin-top:auto;padding-top:8px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--brand-soft);color:var(--brand-strong);font-weight:600;margin-bottom:12px}
+.steps h3{font-size:17px;margin-bottom:4px}
+.steps p{font-size:14px;color:var(--ink-2);line-height:1.6}
+
+/* guide */
+.guide{display:grid;gap:10px;max-width:780px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+details[open]{border-color:var(--brand)}
+summary{list-style:none;display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;font-weight:500}
+summary::-webkit-details-marker{display:none}
+summary .e{width:38px;height:38px;border-radius:10px;background:var(--tint);display:grid;place-items:center;font-size:20px;flex:none}
+summary small{display:block;font-weight:400;color:var(--ink-2);font-size:14px;line-height:1.4}
+summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid var(--ink-2);border-bottom:2px solid var(--ink-2);rotate:45deg;transition:rotate .2s;flex:none}
+details[open] summary::after{rotate:225deg}
+details ul{margin:0;padding:0 22px 18px 70px;color:var(--ink-2);font-size:15px}
+details li{margin-bottom:4px}
+
+/* member */
+.member-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px}
+.box h3{font-size:18px;margin-bottom:12px}
+.benefits{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:12px}
+.benefits li{display:flex;gap:12px;color:var(--ink-2);font-size:15px}
+.benefits li b{color:var(--ink);font-weight:500;display:block}
+.benefits .e{width:36px;height:36px;border-radius:10px;background:var(--tint);display:grid;place-items:center;flex:none}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.stat{background:var(--tint);border-radius:12px;padding:14px}
+.stat b{display:block;font-size:22px;line-height:1.2}
+.stat span{font-size:13px;color:var(--ink-2)}
+.bar{height:8px;border-radius:999px;background:var(--tint);overflow:hidden;margin:8px 0 4px}
+.bar i{display:block;height:100%;background:var(--brand);border-radius:999px}
+.orders{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.orders li{border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:14px;display:flex;justify-content:space-between;gap:12px}
+.orders b{font-weight:500}
+
+/* footer */
+footer{background:var(--surface);border-top:1px solid var(--line);padding:44px 0 28px;font-size:15px;color:var(--ink-2)}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+footer h4{font-size:15px;color:var(--ink);margin-bottom:10px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--brand)}
+.copy{margin-top:32px;padding-top:18px;border-top:1px solid var(--line);font-size:13px}
+
+/* dialogs */
+dialog{border:0;padding:0;background:var(--surface);color:var(--ink);border-radius:16px;max-width:calc(100% - 24px);width:440px}
+dialog::backdrop{background:rgba(20,18,30,.5)}
+dialog.drawer{margin:0 0 0 auto;height:100%;max-height:100%;border-radius:16px 0 0 16px}
+dialog.drawer[open]{display:flex;flex-direction:column}
+.dh{display:flex;align-items:center;justify-content:space-between;padding:calc(16px + env(safe-area-inset-top,0px)) 20px 14px;border-bottom:1px solid var(--line)}
+.dh h3{font-size:18px}
+.x{border:0;background:var(--tint);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;line-height:1}
+.db{padding:16px 20px;overflow-y:auto;flex:1}
+.df{padding:16px 20px calc(16px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--surface)}
+.lines{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.line{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:start}
+.line .thumb{width:52px;height:52px;aspect-ratio:auto;font-size:26px;border-radius:10px}
+.line b{font-weight:500;font-size:15px;line-height:1.4;display:block}
+.line small{color:var(--ink-2)}
+.qty{display:inline-flex;align-items:center;gap:4px;margin-top:6px;border:1px solid var(--line);border-radius:8px}
+.qty button{border:0;background:none;width:28px;height:28px;cursor:pointer;font-size:16px}
+.qty span{min-width:22px;text-align:center;font-size:14px}
+.lp{text-align:right;font-size:15px;font-weight:500}
+.rm{display:block;margin-top:8px;border:0;background:none;color:var(--ink-2);font-size:13px;cursor:pointer;text-decoration:underline}
+.opt{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0 10px}
+.opt label{border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;font-size:14px;display:flex;gap:8px;align-items:center}
+.opt label:has(input:checked){border-color:var(--brand);background:var(--brand-soft)}
+.opt label:has(input:disabled){opacity:.5;cursor:not-allowed}
+.coupon{display:flex;gap:8px;margin-top:10px}
+.coupon .field{flex:1}
+.msg{font-size:13px;margin-top:6px;min-height:1.2em}
+.msg.ok{color:var(--ok)}.msg.err{color:var(--danger)}
+.sum{display:grid;gap:4px;font-size:15px;margin:14px 0}
+.sum div{display:flex;justify-content:space-between}
+.sum .tot{font-size:18px;font-weight:600;padding-top:8px;border-top:1px solid var(--line);margin-top:4px}
+.chk{display:flex;gap:8px;align-items:flex-start;font-size:14px;margin-top:8px}
+.chk input{margin-top:5px}
+
+.authtabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+.authtabs button{border:0;background:none;padding:14px;cursor:pointer;font-weight:500;color:var(--ink-2);border-bottom:2px solid transparent}
+.authtabs button[aria-selected="true"]{color:var(--brand-strong);border-color:var(--brand)}
+form .row{margin-bottom:12px}
+form label{display:block;font-size:14px;font-weight:500;margin-bottom:4px}
+form .field{width:100%}
+form .err{font-size:13px;color:var(--danger);margin-top:3px;min-height:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.interests{display:flex;flex-wrap:wrap;gap:8px}
+.interests label{display:flex;gap:6px;align-items:center;font-weight:400;border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;margin:0}
+.interests label:has(input:checked){border-color:var(--brand);background:var(--brand-soft)}
+.ok-ico{width:56px;height:56px;border-radius:50%;background:var(--ok-soft);color:var(--ok);display:grid;place-items:center;font-size:28px;margin:0 auto 12px}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));translate:-50% 20px;background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,translate .2s;z-index:100}
+.toast.show{opacity:1;translate:-50% 0}
+
+@media (max-width:900px){
+  .kits,.steps{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  section{padding:52px 0}
+  .hero{padding-top:32px}
+  .hero .wrap,.member-grid,.fgrid{grid-template-columns:1fr}
+  .kits,.steps{grid-template-columns:1fr}
+  .top .wrap{flex-wrap:wrap;gap:8px 12px}
+  nav{order:3;flex-basis:100%;margin-left:0}
+  .actions{margin-left:auto}
+  .tools{margin-left:0;width:100%}
+  .tools .field{flex:1}
+  details ul{padding-left:22px}
+  .two{grid-template-columns:1fr}
+  dialog.drawer{border-radius:0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .toast,.btn,summary::after{transition:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="m-yellow" viewBox="0 0 100 100">
+    <path d="M14 38 L22 6 L46 24Z" fill="#E0B85C"/><path d="M86 38 L78 6 L54 24Z" fill="#E0B85C"/>
+    <circle cx="50" cy="58" r="38" fill="#E0B85C"/>
+    <circle cx="36" cy="56" r="5" fill="#2B2A3A"/><circle cx="64" cy="56" r="5" fill="#2B2A3A"/>
+  </symbol>
+  <symbol id="m-sky" viewBox="0 0 100 100">
+    <circle cx="20" cy="26" r="13" fill="#6FB0C4"/><circle cx="80" cy="26" r="13" fill="#6FB0C4"/>
+    <circle cx="50" cy="58" r="38" fill="#6FB0C4"/>
+    <circle cx="36" cy="56" r="5" fill="#2B2A3A"/><circle cx="64" cy="56" r="5" fill="#2B2A3A"/>
+  </symbol>
+  <symbol id="m-purple" viewBox="0 0 100 100">
+    <path d="M50 4 C50 4 12 46 12 68 a38 34 0 0 0 76 0 C88 46 50 4 50 4Z" fill="#8B84C7"/>
+    <circle cx="37" cy="66" r="5" fill="#fff"/><circle cx="63" cy="66" r="5" fill="#fff"/>
+  </symbol>
+  <symbol id="m-pink" viewBox="0 0 100 100">
+    <ellipse cx="34" cy="24" rx="10" ry="24" fill="#D58BA6"/><ellipse cx="66" cy="24" rx="10" ry="24" fill="#D58BA6"/>
+    <circle cx="50" cy="64" r="32" fill="#D58BA6"/>
+    <circle cx="39" cy="62" r="5" fill="#2B2A3A"/><circle cx="61" cy="62" r="5" fill="#2B2A3A"/>
+  </symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="EVO Exotic Pets หน้าแรก">
+      <span class="faces" aria-hidden="true"><svg><use href="#m-yellow"/></svg><svg><use href="#m-sky"/></svg><svg><use href="#m-purple"/></svg><svg><use href="#m-pink"/></svg></span>
+      <span><b>EVO Exotic Pets</b><small>ร้านสัตว์เลี้ยงพิเศษ ขอนแก่น</small></span>
+    </a>
+    <nav aria-label="เมนูหลัก">
+      <a href="#shop">สินค้า</a>
+      <a href="#kits">ชุดเริ่มต้น</a>
+      <a href="#how">วิธีสั่งซื้อ</a>
+      <a href="#guide">คู่มือ 101</a>
+      <a href="#member">สมาชิก</a>
+    </nav>
+    <div class="actions">
+      <button class="btn ghost sm" id="accountBtn" type="button">เข้าสู่ระบบ</button>
+      <button class="btn sm cartbtn" id="cartBtn" type="button" aria-label="เปิดตะกร้า">ตะกร้า <span class="badge" id="cartCount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>สัตว์เลี้ยงพิเศษ อาหาร และอุปกรณ์ ครบในที่เดียว</h1>
+        <p class="lead">เลือกสัตว์เลี้ยงและอุปกรณ์ที่เหมาะกับแต่ละชนิด สั่งออนไลน์แล้วรับที่ร้านในขอนแก่น พร้อมคู่มือการเลี้ยงสำหรับมือใหม่</p>
+        <div class="cta">
+          <a class="btn" href="#shop">ดูสินค้าทั้งหมด</a>
+          <a class="btn ghost" href="#kits">ชุดเริ่มต้นสำหรับมือใหม่</a>
+        </div>
+        <ul class="points">
+          <li>รับที่ร้านหรือจัดส่ง</li>
+          <li>สะสมแต้มทุกออเดอร์</li>
+          <li>มีคู่มือการเลี้ยงทุกชนิด</li>
+        </ul>
+      </div>
+      <aside class="feature" id="heroKit" aria-label="ชุดแนะนำ"></aside>
+    </div>
+  </section>
+
+  <section id="shop" class="alt">
+    <div class="wrap">
+      <div class="head">
+        <h2>สินค้า</h2>
+        <p>เลือกตามหมวด หรือพิมพ์ค้นหาชื่อสินค้า</p>
+      </div>
+      <div class="toolbar">
+        <div class="tabs" role="group" aria-label="หมวดสินค้า" id="tabs"></div>
+        <div class="tools">
+          <input class="field" id="q" type="search" placeholder="ค้นหาสินค้า" aria-label="ค้นหาสินค้า">
+          <select class="field" id="sort" aria-label="เรียงลำดับ">
+            <option value="def">เรียงตามค่าเริ่มต้น</option>
+            <option value="asc">ราคาต่ำไปสูง</option>
+            <option value="desc">ราคาสูงไปต่ำ</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="note">ราคาและรายการสินค้าเป็นข้อมูลตัวอย่างสำหรับเว็บไซต์ต้นแบบ สัตว์มีชีวิตรับที่ร้านเท่านั้น</p>
+    </div>
+  </section>
+
+  <section id="kits">
+    <div class="wrap">
+      <div class="head">
+        <h2>ชุดเริ่มต้นสำหรับมือใหม่</h2>
+        <p>รวมสัตว์ ที่อยู่ และอุปกรณ์จำเป็นไว้ในชุดเดียว ราคาถูกกว่าซื้อแยก 5%</p>
+      </div>
+      <div class="kits" id="kitGrid"></div>
+    </div>
+  </section>
+
+  <section id="how" class="alt">
+    <div class="wrap">
+      <div class="head"><h2>สั่งซื้อใน 4 ขั้นตอน</h2></div>
+      <ol class="steps">
+        <li><h3>เลือกสินค้า</h3><p>เลือกจากหมวดสินค้าหรือชุดเริ่มต้น แล้วกดเพิ่มลงตะกร้า</p></li>
+        <li><h3>เข้าสู่ระบบ</h3><p>สมัครสมาชิกฟรี เพื่อสะสมแต้มและดูประวัติการสั่งซื้อ</p></li>
+        <li><h3>เลือกการรับสินค้า</h3><p>รับที่ร้าน หรือจัดส่ง (เฉพาะสินค้าที่ไม่ใช่สัตว์มีชีวิต)</p></li>
+        <li><h3>ยืนยันคำสั่งซื้อ</h3><p>ทางร้านจะติดต่อกลับเพื่อยืนยันและแจ้งช่องทางชำระเงิน</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="guide">
+    <div class="wrap">
+      <div class="head">
+        <h2>คู่มือการเลี้ยงสัตว์ 101</h2>
+        <p>พื้นฐานสำหรับมือใหม่ เข้าใจง่าย อัปเดตครบ</p>
+      </div>
+      <div class="guide">
+        <details name="guide" open>
+          <summary><span class="e">🥣</span><span>อาหาร<small>เลือกอาหารให้เหมาะสม</small></span></summary>
+          <ul>
+            <li>สัตว์แต่ละชนิดกินไม่เหมือนกัน เช่น กระต่ายควรมีหญ้าแห้งเป็นอาหารหลัก ส่วนสัตว์เลื้อยคลานบางชนิดกินแมลงหรือผัก</li>
+            <li>ให้น้ำสะอาดเสมอ และเปลี่ยนทุกวัน</li>
+            <li>ค่อยๆ เปลี่ยนอาหาร ไม่เปลี่ยนกะทันหัน</li>
+            <li>ไม่แน่ใจว่าให้กินอะไรได้ ถามที่ร้านก่อนซื้อ</li>
+          </ul>
+        </details>
+        <details name="guide">
+          <summary><span class="e">🏠</span><span>ที่อยู่<small>จัดสภาพแวดล้อมให้น่าอยู่</small></span></summary>
+          <ul>
+            <li>เลือกกรงหรือตู้ที่ใหญ่พอให้สัตว์เดิน กระโดด หรือเลื้อยได้สบาย</li>
+            <li>มีมุมให้หลบซ่อน เพราะสัตว์ที่รู้สึกปลอดภัยจะเครียดน้อยลง</li>
+            <li>สัตว์เลื้อยคลานต้องมีจุดอุ่นและจุดเย็นในตู้เดียวกัน</li>
+            <li>อย่าวางกรงตากแดดจัด หรือใกล้จุดที่ลมแรงและเสียงดัง</li>
+          </ul>
+        </details>
+        <details name="guide">
+          <summary><span class="e">🩺</span><span>สุขภาพ<small>ป้องกันโรค ดูแลสุขภาพอย่างสม่ำเสมอ</small></span></summary>
+          <ul>
+            <li>สังเกตการกิน การขับถ่าย และท่าทางทุกวัน ถ้าผิดปกติให้รีบปรึกษา</li>
+            <li>หลังรับกลับบ้าน ให้น้องพักปรับตัว 2–3 วัน ก่อนจับเล่นมาก</li>
+            <li>ล้างมือก่อนและหลังจับสัตว์ทุกครั้ง โดยเฉพาะสัตว์เลื้อยคลาน</li>
+            <li>หาสัตวแพทย์ที่รักษาสัตว์เลี้ยงพิเศษไว้ล่วงหน้า</li>
+          </ul>
+        </details>
+        <details name="guide">
+          <summary><span class="e">🧰</span><span>อุปกรณ์<small>อุปกรณ์จำเป็นสำหรับสัตว์เลี้ยง</small></span></summary>
+          <ul>
+            <li>กรงหรือตู้ ชามอาหาร ที่ให้น้ำ และวัสดุรองพื้นที่เหมาะกับสัตว์ชนิดนั้น</li>
+            <li>เทอร์โมมิเตอร์ สำหรับดูอุณหภูมิในที่อยู่</li>
+            <li>ไฟให้ความร้อนหรือไฟ UVB สำหรับสัตว์เลื้อยคลานบางชนิด</li>
+            <li>ของเล่นและของแทะ ช่วยให้สัตว์ขนฟูไม่เบื่อ</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="member" class="alt">
+    <div class="wrap">
+      <div class="head">
+        <h2>สมาชิกและแต้มสะสม</h2>
+        <p>สมัครฟรี สะสมแต้มทุกออเดอร์ และดูประวัติการสั่งซื้อได้ทุกเมื่อ</p>
+      </div>
+      <div id="memberBody"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <h4>EVO Exotic Pets</h4>
+        <p>ร้านสัตว์เลี้ยงพิเศษ ขอนแก่น สำหรับคนที่อยากเลี้ยงสัตว์แปลกอย่างเข้าใจ</p>
+      </div>
+      <div>
+        <h4>เมนู</h4>
+        <ul>
+          <li><a href="#shop">สินค้า</a></li>
+          <li><a href="#kits">ชุดเริ่มต้น</a></li>
+          <li><a href="#guide">คู่มือ 101</a></li>
+          <li><a href="#member">สมาชิก</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>ติดต่อร้าน</h4>
+        <!-- TODO: ใส่ข้อมูลจริงของร้าน -->
+        <ul>
+          <li><a href="#">Facebook: EVO Exotic Pets</a></li>
+          <li><a href="#">LINE ร้าน</a></li>
+          <li>ที่อยู่และเวลาเปิดร้าน: ขอนแก่น (เพิ่มข้อมูลภายหลัง)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 EVO Exotic Pets ขอนแก่น · เว็บไซต์ต้นแบบเพื่อการศึกษา ข้อมูลสมาชิกและคำสั่งซื้อเก็บในเบราว์เซอร์นี้เท่านั้น</div>
+  </div>
+</footer>
+
+<!-- cart -->
+<dialog class="drawer" id="cartDlg" aria-labelledby="cartTitle">
+  <div class="dh"><h3 id="cartTitle">ตะกร้าของคุณ</h3><button class="x" type="button" data-close aria-label="ปิด">✕</button></div>
+  <div class="db" id="cartBody"></div>
+  <div class="df" id="cartFoot"></div>
+</dialog>
+
+<!-- auth -->
+<dialog id="authDlg" aria-labelledby="authTitle">
+  <div class="dh"><h3 id="authTitle">สมาชิก</h3><button class="x" type="button" data-close aria-label="ปิด">✕</button></div>
+  <div class="authtabs" role="tablist">
+    <button type="button" role="tab" id="tabLogin" aria-selected="true">เข้าสู่ระบบ</button>
+    <button type="button" role="tab" id="tabReg" aria-selected="false">สมัครสมาชิก</button>
+  </div>
+  <div class="db">
+    <p class="msg" id="authNote"></p>
+    <form id="loginForm" novalidate>
+      <div class="row"><label for="lEmail">อีเมล</label><input class="field" id="lEmail" type="email" autocomplete="email"><div class="err" id="lEmailE"></div></div>
+      <div class="row"><label for="lPass">รหัสผ่าน</label><input class="field" id="lPass" type="password" autocomplete="current-password"><div class="err" id="lPassE"></div></div>
+      <button class="btn block" type="submit">เข้าสู่ระบบ</button>
+    </form>
+    <form id="regForm" novalidate hidden>
+      <div class="two">
+        <div class="row"><label for="rFirst">ชื่อ</label><input class="field" id="rFirst" autocomplete="given-name"><div class="err" id="rFirstE"></div></div>
+        <div class="row"><label for="rLast">นามสกุล</label><input class="field" id="rLast" autocomplete="family-name"><div class="err" id="rLastE"></div></div>
+      </div>
+      <div class="row"><label for="rEmail">อีเมล</label><input class="field" id="rEmail" type="email" autocomplete="email"><div class="err" id="rEmailE"></div></div>
+      <div class="row"><label for="rPhone">เบอร์โทรศัพท์</label><input class="field" id="rPhone" inputmode="numeric" autocomplete="tel"><div class="err" id="rPhoneE"></div></div>
+      <div class="two">
+        <div class="row"><label for="rPass">รหัสผ่าน</label><input class="field" id="rPass" type="password" autocomplete="new-password"><div class="err" id="rPassE"></div></div>
+        <div class="row"><label for="rPass2">ยืนยันรหัสผ่าน</label><input class="field" id="rPass2" type="password" autocomplete="new-password"><div class="err" id="rPass2E"></div></div>
+      </div>
+      <div class="row">
+        <label>สัตว์ที่สนใจ (เลือกได้มากกว่า 1)</label>
+        <div class="interests">
+          <label><input type="checkbox" name="int" value="ขนฟู"> สัตว์ขนฟู</label>
+          <label><input type="checkbox" name="int" value="เลื้อยคลาน"> สัตว์เลื้อยคลาน</label>
+          <label><input type="checkbox" name="int" value="อุปกรณ์"> อุปกรณ์</label>
+        </div>
+      </div>
+      <div class="row">
+        <label class="chk" style="font-weight:400"><input type="checkbox" id="rTerms"> <span>ฉันยอมรับเงื่อนไขการใช้บริการและนโยบายความเป็นส่วนตัว</span></label>
+        <div class="err" id="rTermsE"></div>
+      </div>
+      <button class="btn block" type="submit">สมัครสมาชิก รับ 100 แต้ม</button>
+    </form>
+  </div>
+</dialog>
+
+<!-- success -->
+<dialog id="okDlg" aria-labelledby="okTitle">
+  <div class="db" style="text-align:center;padding:28px 24px">
+    <div class="ok-ico" aria-hidden="true">✓</div>
+    <h3 id="okTitle">สั่งซื้อสำเร็จ</h3>
+    <p class="muted" id="okText" style="margin:10px 0 18px"></p>
+    <button class="btn block" type="button" data-close>ตกลง</button>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- helpers ---------- */
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var fmt=function(n){return '฿'+Math.round(n).toLocaleString('en-US')};
+var esc=function(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+var store={
+  get:function(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
+  set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+function hash(s){
+  try{
+    return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(b){
+      return Array.prototype.map.call(new Uint8Array(b),function(x){return ('0'+x.toString(16)).slice(-2)}).join('');
+    });
+  }catch(e){
+    var h=0;for(var i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))|0}
+    return Promise.resolve('x'+h);
+  }
+}
+
+/* ---------- data (ตัวอย่าง) ---------- */
+var CATS={pets:'สัตว์เลี้ยง',food:'อาหาร',gear:'อุปกรณ์',home:'กรงและตู้'};
+var P=[
+  {id:'ham',cat:'pets',name:'แฮมสเตอร์',desc:'ตัวเล็ก ออกหากินกลางคืน เหมาะกับมือใหม่',price:150,e:'🐹',live:1},
+  {id:'rab',cat:'pets',name:'กระต่ายแคระ',desc:'ต้องมีหญ้าแห้งและพื้นที่ให้วิ่งเล่นทุกวัน',price:1200,e:'🐰',live:1},
+  {id:'hog',cat:'pets',name:'เม่นแคระ',desc:'ชอบความอุ่น ออกหากินกลางคืน',price:2500,e:'🦔',live:1},
+  {id:'gek',cat:'pets',name:'เลพเพิร์ดเจคโค',desc:'กิ้งก่าตัวเล็ก ต้องมีจุดอุ่นในตู้',price:1500,e:'🦎',live:1},
+  {id:'tor',cat:'pets',name:'เต่าบก',desc:'ต้องมีแสง UVB และแคลเซียมสำหรับกระดอง',price:3500,e:'🐢',live:1},
+  {id:'sna',cat:'pets',name:'งูเลี้ยง',desc:'ควรศึกษาก่อนเลี้ยง ต้องมีตู้และความร้อนที่เหมาะสม',price:2800,e:'🐍',live:1},
+  {id:'hay',cat:'food',name:'หญ้าทิมโมธี 500 กรัม',desc:'อาหารหลักของกระต่าย ช่วยเรื่องระบบย่อย',price:180,e:'🌾'},
+  {id:'hamfood',cat:'food',name:'อาหารเม็ดแฮมสเตอร์',desc:'สูตรธัญพืชรวม ถุงละ 500 กรัม',price:89,e:'🌰'},
+  {id:'hogfood',cat:'food',name:'อาหารเม่นแคระ',desc:'โปรตีนสูง เหมาะกับเม่นแคระ',price:150,e:'🥣'},
+  {id:'cricket',cat:'food',name:'จิ้งหรีด 100 ตัว',desc:'อาหารสดสำหรับเจคโคและสัตว์เลื้อยคลานกินแมลง',price:60,e:'🦗'},
+  {id:'torfood',cat:'food',name:'ผักอัดเม็ดสำหรับเต่า',desc:'ให้ใยอาหารและวิตามินสำหรับเต่าบก',price:120,e:'🥬'},
+  {id:'wheel',cat:'gear',name:'วงล้อวิ่งเงียบ',desc:'ให้แฮมสเตอร์ออกกำลังกายตอนกลางคืน',price:250,e:'🎡'},
+  {id:'water',cat:'gear',name:'ขวดน้ำแบบหยด',desc:'ติดกรงได้ ใช้ได้กับสัตว์ขนฟูส่วนใหญ่',price:89,e:'💧'},
+  {id:'thermo',cat:'gear',name:'เทอร์โมมิเตอร์ดิจิทัล',desc:'วัดอุณหภูมิในตู้หรือกรง',price:120,e:'🌡️'},
+  {id:'uvb',cat:'gear',name:'หลอดไฟ UVB',desc:'สำหรับสัตว์เลื้อยคลานที่ต้องการแสง UVB',price:590,e:'💡'},
+  {id:'heat',cat:'gear',name:'หลอดให้ความร้อน',desc:'สร้างจุดอุ่นในตู้สัตว์เลื้อยคลาน',price:350,e:'🔥'},
+  {id:'hide',cat:'gear',name:'บ้านหลบซ่อน',desc:'มุมพักผ่อนให้สัตว์รู้สึกปลอดภัย',price:150,e:'🛖'},
+  {id:'cageham',cat:'home',name:'กรงแฮมสเตอร์',desc:'กรงขนาดกลาง พร้อมชั้นและบันได',price:790,e:'🧺'},
+  {id:'cagerab',cat:'home',name:'กรงกระต่าย',desc:'กรงกว้าง มีถาดรอง ทำความสะอาดง่าย',price:1290,e:'🏡'},
+  {id:'tank',cat:'home',name:'ตู้สัตว์เลื้อยคลาน 60 ซม.',desc:'ตู้กระจกพร้อมฝาระบายอากาศ',price:2490,e:'🪟'}
+];
+var ALL={};
+P.forEach(function(p){ALL[p.id]=p});
+var K=[
+  {id:'kit-ham',name:'ชุดแฮมสเตอร์เริ่มต้น',e:'🐹',items:['ham','cageham','wheel','water','hamfood']},
+  {id:'kit-rab',name:'ชุดกระต่ายเริ่มต้น',e:'🐰',items:['rab','cagerab','hay','water','hide']},
+  {id:'kit-gek',name:'ชุดเจคโคเริ่มต้น',e:'🦎',items:['gek','tank','heat','thermo','cricket']}
+];
+K.forEach(function(k){
+  var sum=0;k.items.forEach(function(i){sum+=ALL[i].price});
+  k.full=sum;k.price=Math.round(sum*0.95/10)*10;k.live=1;k.cat='kit';
+  ALL[k.id]=k;
+});
+
+var REDEEM_AT=300, REDEEM_VALUE=100, FREE_SHIP=1000, SHIP=60;
+
+/* ---------- state ---------- */
+var cart=store.get('evo_cart',[]);
+var users=store.get('evo_users',{});
+var session=store.get('evo_session',null);
+var fulfil='pickup', couponOn=false, usePts=false;
+var cat='all';
+if(session&&!users[session]) session=null;
+var cur=function(){return session?users[session]:null};
+var save=function(){store.set('evo_cart',cart);store.set('evo_users',users);store.set('evo_session',session)};
+
+/* ---------- toast ---------- */
+var tt;
+function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){el.classList.remove('show')},1800)}
+
+/* ---------- products ---------- */
+function productCard(p){
+  return '<article class="p"><div class="thumb" aria-hidden="true">'+p.e+'</div><div>'+
+    (p.live?'<span class="tag">สัตว์มีชีวิต · รับที่ร้าน</span>':'<span class="tag">'+CATS[p.cat]+'</span>')+
+    '<h3>'+esc(p.name)+'</h3><p>'+esc(p.desc)+'</p></div>'+
+    '<div class="pf"><strong>'+fmt(p.price)+'</strong><button class="btn sm" type="button" data-add="'+p.id+'">เพิ่มลงตะกร้า</button></div></article>';
+}
+function renderTabs(){
+  var h='<button class="tab" type="button" data-cat="all" aria-pressed="'+(cat==='all')+'">ทั้งหมด</button>';
+  Object.keys(CATS).forEach(function(k){h+='<button class="tab" type="button" data-cat="'+k+'" aria-pressed="'+(cat===k)+'">'+CATS[k]+'</button>'});
+  $('#tabs').innerHTML=h;
+}
+function renderGrid(){
+  var q=$('#q').value.trim().toLowerCase(), s=$('#sort').value;
+  var list=P.filter(function(p){return (cat==='all'||p.cat===cat)&&(!q||p.name.toLowerCase().indexOf(q)>-1||p.desc.toLowerCase().indexOf(q)>-1)});
+  if(s==='asc')list.sort(function(a,b){return a.price-b.price});
+  if(s==='desc')list.sort(function(a,b){return b.price-a.price});
+  $('#grid').innerHTML=list.length?list.map(productCard).join(''):'<div class="empty" style="grid-column:1/-1">ไม่พบสินค้าที่ค้นหา ลองเปลี่ยนคำค้นหรือเลือกหมวดอื่น</div>';
+}
+function renderKits(){
+  $('#kitGrid').innerHTML=K.map(function(k){
+    return '<article class="kit"><div class="thumb" aria-hidden="true">'+k.e+'</div><h3>'+k.name+'</h3><ul>'+
+      k.items.map(function(i){return '<li>'+esc(ALL[i].name)+'</li>'}).join('')+'</ul>'+
+      '<div class="price-row"><div><span class="price">'+fmt(k.price)+'</span><span class="was">'+fmt(k.full)+'</span><span class="save">ประหยัด '+fmt(k.full-k.price)+'</span></div>'+
+      '<button class="btn sm" type="button" data-add="'+k.id+'">เพิ่มลงตะกร้า</button></div></article>';
+  }).join('');
+  var k=K[0];
+  $('#heroKit').innerHTML='<div class="top-row"><div class="thumb" aria-hidden="true">'+k.e+'</div><div><small>ชุดแนะนำสำหรับมือใหม่</small><h3>'+k.name+'</h3></div></div>'+
+    '<div class="incl">'+k.items.map(function(i){return '<span>'+esc(ALL[i].name)+'</span>'}).join('')+'</div>'+
+    '<div class="price-row"><div><span class="price">'+fmt(k.price)+'</span><span class="was">'+fmt(k.full)+'</span><span class="save">ประหยัด '+fmt(k.full-k.price)+'</span></div>'+
+    '<button class="btn" type="button" data-add="'+k.id+'">เพิ่มลงตะกร้า</button></div>';
+}
+
+/* ---------- cart ---------- */
+function calc(){
+  var sub=0,count=0,hasLive=false;
+  cart.forEach(function(l){var p=ALL[l.id];if(!p)return;sub+=p.price*l.qty;count+=l.qty;if(p.live)hasLive=true});
+  var f=hasLive?'pickup':fulfil, u=cur();
+  var ship=(f==='delivery'&&sub>0&&sub<FREE_SHIP)?SHIP:0;
+  var cd=(couponOn&&u&&u.orders.length===0)?Math.round(sub*0.10):0;
+  var pd=(usePts&&u&&u.points>=REDEEM_AT&&sub-cd>=REDEEM_VALUE)?REDEEM_VALUE:0;
+  var total=Math.max(0,sub+ship-cd-pd);
+  return {sub:sub,count:count,hasLive:hasLive,f:f,ship:ship,cd:cd,pd:pd,total:total,earned:Math.floor(total/10)};
+}
+function renderCart(){
+  var c=calc(), u=cur();
+  $('#cartCount').textContent=c.count;
+  var body=$('#cartBody'), foot=$('#cartFoot');
+  if(!cart.length){
+    body.innerHTML='<div class="empty">ตะกร้าของคุณยังว่าง<br><button class="btn sm" type="button" data-close data-go="#shop" style="margin-top:12px">เลือกสินค้า</button></div>';
+    foot.innerHTML='';
+    return;
+  }
+  var h='<ul class="lines">';
+  cart.forEach(function(l){
+    var p=ALL[l.id];if(!p)return;
+    h+='<li class="line"><div class="thumb" aria-hidden="true">'+p.e+'</div><div><b>'+esc(p.name)+'</b><small>'+fmt(p.price)+' ต่อชิ้น</small>'+
+      '<div class="qty"><button type="button" data-q="'+p.id+'" data-d="-1" aria-label="ลดจำนวน">−</button><span>'+l.qty+'</span><button type="button" data-q="'+p.id+'" data-d="1" aria-label="เพิ่มจำนวน">+</button></div></div>'+
+      '<div class="lp">'+fmt(p.price*l.qty)+'<button class="rm" type="button" data-rm="'+p.id+'">ลบ</button></div></li>';
+  });
+  h+='</ul>';
+  h+='<div class="opt"><label><input type="radio" name="ful" value="pickup"'+(c.f==='pickup'?' checked':'')+'> รับที่ร้าน</label>'+
+     '<label><input type="radio" name="ful" value="delivery"'+(c.f==='delivery'?' checked':'')+(c.hasLive?' disabled':'')+'> จัดส่ง</label></div>';
+  if(c.hasLive) h+='<p class="msg">ตะกร้ามีสัตว์มีชีวิต จึงเลือกได้เฉพาะรับที่ร้าน</p>';
+  if(c.f==='delivery') h+='<label for="addr" style="font-size:14px;font-weight:500">ที่อยู่จัดส่ง</label><textarea class="field" id="addr" rows="3" style="width:100%;margin-top:4px" placeholder="บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด รหัสไปรษณีย์"></textarea><p class="msg" id="addrMsg"></p>';
+  h+='<div class="coupon"><input class="field" id="coupon" placeholder="โค้ดส่วนลด" aria-label="โค้ดส่วนลด" value="'+(couponOn?'EVO10':'')+'"><button class="btn ghost sm" type="button" id="applyCoupon">ใช้โค้ด</button></div><p class="msg" id="couponMsg"></p>';
+  if(u&&u.points>=REDEEM_AT) h+='<label class="chk"><input type="checkbox" id="usePts"'+(usePts?' checked':'')+'> <span>ใช้ '+REDEEM_AT+' แต้ม แลกส่วนลด '+fmt(REDEEM_VALUE)+' (คุณมี '+u.points+' แต้ม)</span></label>';
+  body.innerHTML=h;
+  foot.innerHTML='<div class="sum"><div><span>ราคาสินค้า</span><span>'+fmt(c.sub)+'</span></div>'+
+    '<div><span>ค่าจัดส่ง</span><span>'+(c.f==='delivery'?(c.ship?fmt(c.ship):'ฟรี'):'-')+'</span></div>'+
+    (c.cd?'<div><span>ส่วนลดโค้ด</span><span>−'+fmt(c.cd)+'</span></div>':'')+
+    (c.pd?'<div><span>ส่วนลดจากแต้ม</span><span>−'+fmt(c.pd)+'</span></div>':'')+
+    '<div class="tot"><span>รวมทั้งหมด</span><span>'+fmt(c.total)+'</span></div></div>'+
+    '<p class="muted" style="font-size:13px;margin-bottom:10px">'+(u?'รับ '+c.earned+' แต้มหลังสั่งซื้อสำเร็จ':'เข้าสู่ระบบเพื่อสะสมแต้มและสั่งซื้อ')+'</p>'+
+    '<button class="btn block" type="button" id="checkout">'+(u?'ยืนยันการสั่งซื้อ':'เข้าสู่ระบบเพื่อสั่งซื้อ')+'</button>';
+}
+function addToCart(id){
+  var l=cart.filter(function(x){return x.id===id})[0];
+  if(l){ if(l.qty<9) l.qty++; } else cart.push({id:id,qty:1});
+  save();renderCart();toast('เพิ่ม '+ALL[id].name+' ลงตะกร้าแล้ว');
+}
+function changeQty(id,d){
+  var l=cart.filter(function(x){return x.id===id})[0];if(!l)return;
+  l.qty=Math.min(9,l.qty+d);
+  if(l.qty<=0) cart=cart.filter(function(x){return x.id!==id});
+  save();renderCart();
+}
+function keepTyped(){ // keep typed address when re-rendering
+  var a=$('#addr');return a?a.value:'';
+}
+
+/* ---------- dialogs ---------- */
+function open(d){if(!d.open){d.showModal()}}
+function close(d){if(d.open){d.close()}}
+$$('dialog').forEach(function(d){
+  d.addEventListener('click',function(e){if(e.target===d)d.close()});
+});
+
+/* ---------- auth ---------- */
+var authNote=$('#authNote');
+function setTab(reg){
+  $('#tabLogin').setAttribute('aria-selected',String(!reg));
+  $('#tabReg').setAttribute('aria-selected',String(reg));
+  $('#loginForm').hidden=reg;$('#regForm').hidden=!reg;
+}
+function openAuth(reg,note){
+  setTab(!!reg);
+  authNote.textContent=note||'';authNote.className='msg';
+  open($('#authDlg'));
+}
+$('#tabLogin').addEventListener('click',function(){setTab(false)});
+$('#tabReg').addEventListener('click',function(){setTab(true)});
+function err(id,t){$('#'+id).textContent=t||''}
+var emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+$('#loginForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var em=$('#lEmail').value.trim().toLowerCase(), pw=$('#lPass').value, ok=true;
+  err('lEmailE',''); err('lPassE','');
+  if(!emailRe.test(em)){err('lEmailE','กรุณากรอกอีเมลให้ถูกต้อง');ok=false}
+  if(!pw){err('lPassE','กรุณากรอกรหัสผ่าน');ok=false}
+  if(!ok)return;
+  var u=users[em];
+  if(!u){err('lEmailE','ไม่พบอีเมลนี้ กรุณาสมัครสมาชิกก่อน');return}
+  hash(pw).then(function(h){
+    if(h!==u.hash){err('lPassE','รหัสผ่านไม่ถูกต้อง');return}
+    session=em;save();afterAuth('ยินดีต้อนรับกลับมา '+u.first);
+  });
+});
+$('#regForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var f=$('#rFirst').value.trim(), l=$('#rLast').value.trim(), em=$('#rEmail').value.trim().toLowerCase(),
+      ph=$('#rPhone').value.replace(/[\s-]/g,''), pw=$('#rPass').value, pw2=$('#rPass2').value, ok=true;
+  ['rFirstE','rLastE','rEmailE','rPhoneE','rPassE','rPass2E','rTermsE'].forEach(function(i){err(i,'')});
+  if(!f){err('rFirstE','กรุณากรอกชื่อ');ok=false}
+  if(!l){err('rLastE','กรุณากรอกนามสกุล');ok=false}
+  if(!emailRe.test(em)){err('rEmailE','กรุณากรอกอีเมลให้ถูกต้อง');ok=false}
+  else if(users[em]){err('rEmailE','อีเมลนี้สมัครแล้ว ลองเข้าสู่ระบบ');ok=false}
+  if(!/^0\d{9}$/.test(ph)){err('rPhoneE','กรุณากรอกเบอร์โทร 10 หลัก');ok=false}
+  if(pw.length<8){err('rPassE','อย่างน้อย 8 ตัวอักษร');ok=false}
+  if(pw2!==pw){err('rPass2E','รหัสผ่านไม่ตรงกัน');ok=false}
+  if(!$('#rTerms').checked){err('rTermsE','กรุณายอมรับเงื่อนไขก่อนสมัคร');ok=false}
+  if(!ok)return;
+  var ints=$$('input[name=int]:checked').map(function(x){return x.value});
+  hash(pw).then(function(h){
+    users[em]={first:f,last:l,email:em,phone:ph,hash:h,points:100,orders:[],interests:ints};
+    session=em;save();afterAuth('สมัครสมาชิกสำเร็จ รับ 100 แต้มต้อนรับ');
+  });
+});
+function afterAuth(msg){
+  close($('#authDlg'));
+  $('#loginForm').reset();$('#regForm').reset();
+  renderAll();toast(msg);
+}
+function logout(){session=null;couponOn=false;usePts=false;save();renderAll();toast('ออกจากระบบแล้ว')}
+
+/* ---------- member ---------- */
+function renderMember(){
+  var u=cur(), el=$('#memberBody');
+  if(!u){
+    el.innerHTML='<div class="member-grid"><div class="box"><h3>สิทธิพิเศษสำหรับสมาชิก</h3><ul class="benefits">'+
+      '<li><span class="e">⭐</span><span><b>สะสม 1 แต้มทุก ฿10</b>ครบ '+REDEEM_AT+' แต้ม แลกส่วนลด '+fmt(REDEEM_VALUE)+'</span></li>'+
+      '<li><span class="e">🎁</span><span><b>สมัครใหม่รับ 100 แต้ม</b>และโค้ด EVO10 ลด 10% ออเดอร์แรก</span></li>'+
+      '<li><span class="e">🧾</span><span><b>ดูประวัติการสั่งซื้อ</b>สั่งซ้ำได้ง่ายขึ้น</span></li></ul>'+
+      '<button class="btn" type="button" data-auth="reg">สมัครสมาชิกฟรี</button> <button class="btn ghost" type="button" data-auth="login">เข้าสู่ระบบ</button></div>'+
+      '<div class="box"><h3>ประวัติการสั่งซื้อ</h3><p class="muted">เข้าสู่ระบบเพื่อดูประวัติการสั่งซื้อและแต้มสะสมของคุณ</p></div></div>';
+    return;
+  }
+  var spent=u.orders.reduce(function(s,o){return s+o.total},0);
+  var pct=Math.min(100,Math.round(u.points/REDEEM_AT*100));
+  var left=Math.max(0,REDEEM_AT-u.points);
+  var ords=u.orders.length?'<ul class="orders">'+u.orders.slice().reverse().map(function(o){
+    return '<li><div><b>'+o.id+'</b><br><span class="muted">'+o.date+' · '+(o.f==='delivery'?'จัดส่ง':'รับที่ร้าน')+'<br>'+esc(o.summary)+'</span></div><div><b>'+fmt(o.total)+'</b></div></li>';
+  }).join('')+'</ul>':'<p class="muted">ยังไม่มีคำสั่งซื้อ เริ่มเลือกสินค้าได้เลย</p>';
+  el.innerHTML='<div class="member-grid"><div class="box"><h3>สวัสดี '+esc(u.first+' '+u.last)+'</h3>'+
+    '<div class="stats"><div class="stat"><b>'+u.points+'</b><span>แต้มสะสม</span></div><div class="stat"><b>'+u.orders.length+'</b><span>ออเดอร์</span></div><div class="stat"><b>'+fmt(spent)+'</b><span>ยอดสั่งซื้อ</span></div></div>'+
+    '<div style="font-size:14px"><b style="font-weight:500">แลกส่วนลด '+fmt(REDEEM_VALUE)+'</b></div><div class="bar" role="progressbar" aria-valuenow="'+pct+'" aria-valuemin="0" aria-valuemax="100"><i style="width:'+pct+'%"></i></div>'+
+    '<p class="muted" style="font-size:13px">'+(left?'อีก '+left+' แต้ม แลกส่วนลดได้':'แลกส่วนลดได้แล้ว เลือกใช้แต้มในตะกร้า')+'</p>'+
+    (u.orders.length===0?'<p style="margin-top:14px;font-size:14px;color:var(--ok)">คุณมีโค้ด <b>EVO10</b> ลด 10% สำหรับออเดอร์แรก</p>':'')+
+    '<div style="margin-top:18px"><button class="btn ghost sm" type="button" data-logout>ออกจากระบบ</button></div></div>'+
+    '<div class="box"><h3>ประวัติการสั่งซื้อ</h3>'+ords+'</div></div>';
+}
+function renderAccountBtn(){
+  var u=cur(),b=$('#accountBtn');
+  b.textContent=u?u.first:'เข้าสู่ระบบ';
+  b.setAttribute('aria-label',u?'บัญชีของ '+u.first:'เข้าสู่ระบบ');
+}
+
+/* ---------- checkout ---------- */
+function checkout(){
+  var u=cur();
+  if(!u){close($('#cartDlg'));openAuth(false,'เข้าสู่ระบบหรือสมัครสมาชิกก่อนสั่งซื้อ ตะกร้าของคุณจะยังอยู่');return}
+  var c=calc();
+  if(!cart.length)return;
+  var addr='';
+  if(c.f==='delivery'){
+    addr=($('#addr')||{}).value||'';
+    if(addr.trim().length<10){var m=$('#addrMsg');m.textContent='กรุณากรอกที่อยู่จัดส่งให้ครบถ้วน';m.className='msg err';return}
+  }
+  var id='EVO'+String(Date.now()).slice(-6);
+  var summary=cart.map(function(l){return ALL[l.id].name+' ×'+l.qty}).join(', ');
+  u.points=u.points-(c.pd?REDEEM_AT:0)+c.earned;
+  u.orders.push({id:id,date:new Date().toLocaleDateString('th-TH'),total:c.total,f:c.f,summary:summary,address:addr.trim()});
+  cart=[];couponOn=false;usePts=false;fulfil='pickup';
+  save();renderAll();
+  close($('#cartDlg'));
+  $('#okText').textContent='เลขที่คำสั่งซื้อ '+id+' ยอดรวม '+fmt(c.total)+' คุณได้รับ '+c.earned+' แต้ม ทางร้านจะติดต่อกลับเพื่อยืนยันและแจ้งช่องทางชำระเงิน';
+  open($('#okDlg'));
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click',function(e){
+  var t=e.target, b;
+  if((b=t.closest('[data-add]')))return addToCart(b.getAttribute('data-add'));
+  if((b=t.closest('[data-q]')))return changeQty(b.getAttribute('data-q'),+b.getAttribute('data-d'));
+  if((b=t.closest('[data-rm]'))){cart=cart.filter(function(x){return x.id!==b.getAttribute('data-rm')});save();return renderCart()}
+  if((b=t.closest('[data-cat]'))){cat=b.getAttribute('data-cat');renderTabs();return renderGrid()}
+  if((b=t.closest('[data-auth]')))return openAuth(b.getAttribute('data-auth')==='reg');
+  if(t.closest('[data-logout]'))return logout();
+  if((b=t.closest('[data-close]'))){var d=b.closest('dialog');if(d)d.close();var g=b.getAttribute('data-go');if(g){var el=$(g);if(el)el.scrollIntoView()}return}
+  if(t.closest('#checkout'))return checkout();
+  if(t.closest('#applyCoupon')){
+    var v=($('#coupon').value||'').trim().toUpperCase(), m=$('#couponMsg'), u=cur();
+    if(v!=='EVO10'){couponOn=false;m.textContent='ไม่พบโค้ดนี้';m.className='msg err';return}
+    if(!u){couponOn=false;m.textContent='เข้าสู่ระบบก่อนใช้โค้ด';m.className='msg err';return}
+    if(u.orders.length>0){couponOn=false;m.textContent='โค้ดนี้ใช้ได้เฉพาะออเดอร์แรก';m.className='msg err';return}
+    couponOn=true;renderCart();var m2=$('#couponMsg');m2.textContent='ใช้โค้ด EVO10 แล้ว ลด 10%';m2.className='msg ok';return;
+  }
+});
+document.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.name==='ful'){var a=keepTyped();fulfil=t.value;renderCart();var n=$('#addr');if(n)n.value=a}
+  if(t.id==='usePts'){usePts=t.checked;var a2=keepTyped();renderCart();var n2=$('#addr');if(n2)n2.value=a2}
+});
+$('#cartBtn').addEventListener('click',function(){renderCart();open($('#cartDlg'))});
+$('#accountBtn').addEventListener('click',function(){
+  if(cur()){var m=$('#member');if(m)m.scrollIntoView()}else openAuth(false);
+});
+$('#q').addEventListener('input',renderGrid);
+$('#sort').addEventListener('change',renderGrid);
+
+/* ---------- init ---------- */
+function renderAll(){renderCart();renderMember();renderAccountBtn()}
+renderTabs();renderGrid();renderKits();renderAll();
+})();
+</script>
+</body>
+</html>
